@@ -10,17 +10,21 @@
  * @return {number[]}
  */
 var dailyTemperatures = function (T) {
-    let stack = [],
-        riseArray = new Array(T.length).fill(0);
-
+    let stack = [];
     for (let i = 0; i < T.length; i++) {
-        stack.push(T[i])
-        if (T[i + 1] > T[i]) {
-            riseArray[i] += 1;
-            stack.pop(T(i))
+        for (let j = i; j < T.length; j++) {
+            if (T[j] > T[i]) {
+                stack.push(j + i);
+                break
+            } else {
+                stack.push(0);
+            }
         }
     }
+    return stack;
 };
+
+dailyTemperatures([23, 25, 21, 19, 22, 26, 23]);
 
 // @lc code=end
 
