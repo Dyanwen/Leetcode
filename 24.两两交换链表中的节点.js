@@ -12,19 +12,44 @@
  *     this.next = (next===undefined ? null : next)
  * }
  */
+
+function ListNode(val, next) {
+    this.val = (val === undefined ? 0 : val)
+    this.next = (next === undefined ? null : next)
+}
 /**
  * @param {ListNode} head
  * @return {ListNode}
  */
 var swapPairs = function (head) {
-    if (!head || !head.next) {
-        return head;
-    }
-    let tempHead = head.next;
-    head.next = swapPairs(head.next.next);
-    tempHead.next = head;
-    return tempHead;
+    let self = new ListNode(0, head)
+    let pre = self;
 
+    while (pre.next && pre.next.next) {
+        a = pre.next;
+        b = a.next;
+        pre.next = b;
+
+        a.next = b.next;
+        pre = b.next = a;
+    }
+    return self.next
 };
+
+
+
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+// var swapPairs = function (head) {
+//     if (!head || !head.next) {
+//         return head;
+//     }
+//     let tempHead = head.next;
+//     head.next = swapPairs(head.next.next);
+//     tempHead.next = head;
+//     return tempHead;
+// };
 // @lc code=end
 
